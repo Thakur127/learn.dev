@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "app"
+version = "0.1.0"
+description = ""
+authors = ["Ravi Thakur <phenominal9159@gmail.com>"]
+readme = "README.md"
+packages = [{ include = "app" }]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.112.2"
+uvicorn = { extras = ["standard"], version = "^0.30.6" }
+sqlmodel = "^0.0.21"
+alembic = "^1.13.2"
+python-dotenv = "^1.0.1"
+psycopg2-binary = "^2.9.9"
+pydantic = { extras = ["email"], version = "^2.8.2" }
+python-multipart = "^0.0.9"
+pyjwt = "^2.9.0"
+pendulum = "^3.0.0"
+bcrypt = "^4.2.0"
+python-slugify = "^8.0.4"
+types-psycopg2 = "^2.9.21.20240819"
+faker = "^28.1.0"
+google-auth = "^2.34.0"
+google-auth-oauthlib = "^1.2.1"
+google-auth-httplib2 = "^0.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
