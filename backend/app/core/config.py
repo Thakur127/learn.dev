@@ -32,10 +32,16 @@ class Settings:
     GOOGLE_CLIENT_ID: Optional[str] = os.getenv("GOOGLE_CLIENT_ID")
     GOOGLE_CLIENT_SECRET: Optional[str] = os.getenv("GOOGLE_CLIENT_SECRET")
 
-    # CORS 
-    ALLOW_ORIGINS = [os.getenv('FRONTEND_DOMAIN')]
-    ALLOW_METHODS = ['*']
-    ALLOW_HEADERS = ['*']
+    # CORS
+    ALLOW_ORIGINS = [os.getenv("FRONTEND_DOMAIN")]
+    ALLOW_METHODS = ["*"]
+    ALLOW_HEADERS = ["*"]
+
+    # RATE LIMIT
+    REQUESTS_LIMIT = int(os.getenv("REQUESTS_LIMIT", 100))
+    TIME_WINDOW = int(
+        os.getenv("TIME_WINDOW", 1 * MINUTE)
+    )  # in seconds, by default 60 seconds
 
 
 settings = Settings()

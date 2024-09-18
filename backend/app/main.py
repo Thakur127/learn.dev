@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
+from app.middlewares import RateLimiterMiddleware
 from app.api.routes import UserRouter, AuthRouter, ChallengeRouter
 from app.core.config import settings
 
@@ -25,11 +25,17 @@ app.add_middleware(
     allow_headers=settings.ALLOW_HEADERS,
 )
 
+app.add_middleware(
+    RateLimiterMiddleware,
+    requests_limit=settings.REQUESTS_LIMIT,
+    time_window=settings.TIME_WINDOW,
+)
+
 app.include_router(UserRouter)
 app.include_router(AuthRouter)
 app.include_router(ChallengeRouter)
 
 
-@app.get("/")
-def health_check():
+@app.get("/api/v1/")
+async def health_check():
     return "up and running"
