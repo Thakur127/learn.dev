@@ -25,7 +25,7 @@ const Page = () => {
   const [selectedTopics, setSelectedTopics] = useState<Topic[]>([]); // Selected topics
 
   // Infinite Query for fetching paginated challenges
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isPending } =
     useInfiniteQuery({
       queryKey: ["challenge-available", debouncedTitle, selectedTopics],
       queryFn: async ({ pageParam = 0 }) => {
@@ -118,8 +118,8 @@ const Page = () => {
           />
         </div>
       </div>
-
-      <Suspense fallback={"Loading..."}>
+      <div>{isPending && <div>Loading...</div>}</div>
+      <>
         {data?.pages?.flatMap((page) => page).length !== 0 ? (
           <div>
             <ul className="space-y-2 list-none">
@@ -128,7 +128,7 @@ const Page = () => {
                   <li key={challenge.id}>
                     <Card>
                       <CardHeader className="pb-1">
-                        <CardTitle className="flex justify-between items-start">
+                        <CardTitle className="flex justify-between items-start gap-2">
                           <span className="flex flex-col">
                             <Link
                               href="/challenges/[slug]"
@@ -159,7 +159,7 @@ const Page = () => {
                           </Link>
                         </span>
                         <div className="mt-2">
-                          <ul className="list-none flex wrap space-x-1">
+                          <ul className="list-none flex flex-wrap gap-1 md:gap-2">
                             {challenge.topic_tags.map((tag, idx) => (
                               <li key={idx}>
                                 {selectedTopics.some(
@@ -197,7 +197,7 @@ const Page = () => {
         ) : (
           <h1>No Challenge Found. But we will add in future for sure.</h1>
         )}
-      </Suspense>
+      </>
     </MaxWidthWrapper>
   );
 };

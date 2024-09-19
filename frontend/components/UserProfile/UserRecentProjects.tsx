@@ -34,12 +34,14 @@ const UserRecentProjects = ({ challenges }: { challenges: any }) => {
                   className="flex items-start justify-between border shadow-md p-4 rounded-md"
                 >
                   <div>
-                    <div className="flex items-start gap-4">
-                      <CodeXml />
-                      <div>
+                    <div className="flex items-start gap-2 md:gap-4">
+                      <div className="hidden md:block">
+                        <CodeXml className="w-6 h-6" />
+                      </div>
+                      <div className="">
                         <Link
                           href={`/challenges/${challenge.slug}`}
-                          className="flex gap-2 items-center"
+                          className="flex gap-2 items-start"
                         >
                           <span
                             className={cn(
@@ -67,7 +69,7 @@ const UserRecentProjects = ({ challenges }: { challenges: any }) => {
                           </span>
                           <p className="font-medium">{challenge.title}</p>
                         </Link>
-                        <div className="text-sm text-muted-foreground space-x-2 mt-2">
+                        <div className="text-sm text-muted-foreground flex flex-wrap gap-1 md:gap-2 items-center mt-2">
                           {challenge.topic_tags.map((topic: any) => {
                             return (
                               <Badge variant="secondary" key={topic.id}>
